@@ -9,7 +9,7 @@ exports.getTasks = (req, res) => {
     const query = `SELECT * FROM tasks WHERE id IN (?)`;
     db.query(query, [ids], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json({ data: results });
+        res.json(results);
     });
 };
 

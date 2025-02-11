@@ -20,9 +20,21 @@ exports.getTasksByUser = (req, res) => {
     const query = `SELECT * FROM tasks WHERE user_id = ?`;
     db.query(query, [userId], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json({ data: results });
+        res.json(results);
     });
 };
+
+exports.getSubTasks = (req, res) => {
+  let taskId = req.query.taskId;
+  
+  if (!taskId) return res.status(400).json({ error: "Task ID is required" });
+  
+  const query = `SELECT * FROM subtasks where task_id = ?`
+  db.query(query, [taskId], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+        res.json(results);
+  })
+}
 
 exports.addTask = (req, res) => {
     const { userId, title } = req.body;
@@ -36,7 +48,7 @@ exports.addTask = (req, res) => {
 
 exports.addSubTask = (req, res) => {
     const { title, text, lang, taskId } = req.body;
-    db.query('INSERT INTO subtasks (title, text, lang, task_id) VALUES (?,?,?,?)', [title || "Title", text || "", lang || "text", taskId], (err, results) => {
+    db.query('INSERT INTO subtasks (title, text, lang, task_id) VALUES (?,?,?,?)', [title || "Title", text || '', lang || "text", taskId], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }

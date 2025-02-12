@@ -55,3 +55,37 @@ exports.addSubTask = (req, res) => {
         res.json({ message: 'User added successfully', data: {id: results.insertId, task_id: taskId, title: title || "Title", text: text || "", lang: lang || "text"} });
     });
 };
+
+exports.updateSubTask = (req,res) => {
+  const subTaskId= req.params.id;
+  const {title,text,lang} = req.body;
+  
+  let fields = []
+  let values = []
+  
+  if(title !== undefined) {
+    fields.push("title = ?")
+    values.push(title)
+  }
+  if(text !== undefined) {
+    fields.push("text = ?")
+    values.push(text)
+  }
+  if(lang !== undefined) {
+    fields.push("lang = ?")
+    values.push(lang)
+  }
+  
+  if(fields.length == 0) {
+    return res.status(400).json({message: "Tidak ada data yang akan diperbarui"})
+  }
+  values.push(subTaskId)
+  
+  const query = `UPDATE subtasks SET ${fields.join(', ')} WHERE id = ?`
+  
+  db.query(query, values, (err, results) => {
+    if(err) return res.status(500).json({message: "Gagal update data", error: err})
+    
+    res.status(200).json({message: "Subtask berhasil diperbarui", id: subTaskId, updatedFields: req.body})
+  })
+}

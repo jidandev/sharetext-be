@@ -1,0 +1,23 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  ssl      = "true"
+}
+
+model Task {
+  id    Int     @id @default(autoincrement())
+  title  String @default("New task")
+  password  String @default("")
+  slug String  @unique
+  createdAt DateTime @default(now)
+  updatedAt DateTime @updatedAt
+}
+
+model SubTask {
+  id       Int    @id @default(autoincrement())
+  content    String @default("")
+  lang  String  @default("text")
+  taskId   Int    @references(Task.id) @onDelete(cascade)
+  createdAt DateTime @default(now)
+  updatedAt DateTime @updatedAt
+}

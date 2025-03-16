@@ -9,6 +9,7 @@ router.get('/subtasks/:taskId', apiKeyMiddleware, SubTaskController.getSubTasks)
 router.post('/subtask', apiKeyMiddleware, SubTaskController.createSubTask);
 
 router.patch('/updatesubtask/content/:id', apiKeyMiddleware, SubTaskController.updateContent);
+router.patch('/updatesubtask/lang/:id', apiKeyMiddleware, SubTaskController.updateLang);
 
 router.delete('/subtask/:id', apiKeyMiddleware, SubTaskController.deleteSubTask);
 

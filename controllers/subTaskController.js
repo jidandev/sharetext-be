@@ -45,9 +45,16 @@ const SubTaskController = {
       
       const {id} = req.params;
       const { content } = req.body;
-      const subTask = await subTaskModel.update({where: {id}, data: {content}});
+      if(content) {
+        const subTask = await subTaskModel.update({where: {id}, data: {content}});
       
       res.status(200).json(subTask)
+      } else {
+        const subTask = await subTaskModel.update({where: {id}, data: {content: ""}});
+      
+      res.status(200).json(subTask)
+      }
+      
       
     } catch (error) {
       console.error("❌ Error:", error);

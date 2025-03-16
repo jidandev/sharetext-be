@@ -14,7 +14,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "my-test": "file:../Ladder-Orm",
+    "ladder-orm": "^1.0.0",
     "nanoid": "^5.1.0"
   }
 }

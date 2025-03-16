@@ -1,4 +1,4 @@
-const {initORM} = require('my-test');
+const {initORM} = require('ladder-orm');
 
 let ormInstance;
 let taskModel;

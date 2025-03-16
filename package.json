@@ -15,6 +15,6 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "ladder-orm": "^1.0.0",
-    "nanoid": "^5.1.0"
+    "nanoid": "3.3.4"
   }
 }

@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
       const replyModel = getReplyModel();
       
       if(replyModel) {
-        const reply = await replyModel.create({username: data.username, content: data.content, commentId: data.commentId})
+        const reply = await replyModel.create({username: socket.id, content: data.content, commentId: data.commentId})
         io.emit("receiveReply", reply)
       }
     } catch(e) {

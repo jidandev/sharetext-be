@@ -5,6 +5,7 @@ const SubTaskController = require('../controllers/subTaskController');
 const router = express.Router();
 
 router.get('/subtasks/:taskId', apiKeyMiddleware, SubTaskController.getSubTasks);
+router.get('/comments/:subTaskId', apiKeyMiddleware, SubTaskController.fetchComments);
 
 router.post('/subtask', apiKeyMiddleware, SubTaskController.createSubTask);
 

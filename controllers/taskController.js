@@ -91,7 +91,7 @@ const TaskController = {
       
       const {slug} = req.params;
       const { password } = req.body;
-      const task = await taskModel.update({where: {slug}, data: {password}});
+      const task = await taskModel.updateOne({where: {slug}, data: {password}});
       
       res.status(200).json(task)
       
@@ -110,7 +110,7 @@ const TaskController = {
       
       const {slug} = req.params;
       const { title } = req.body;
-      const task = await taskModel.update({where: {slug}, data: {title}});
+      const task = await taskModel.updateOne({where: {slug}, data: {title}});
       
       res.status(200).json(task)
       

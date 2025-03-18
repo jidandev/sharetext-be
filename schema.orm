@@ -21,3 +21,23 @@ model SubTask {
   createdAt DateTime @default(now)
   updatedAt DateTime @updatedAt
 }
+
+model Comment {
+  id       Int    @id @default(autoincrement())
+  username    String
+  avatar String  @default("default")
+  content String  @default("")
+  subTaskId   Int    @references(SubTask.id) @onDelete(cascade)
+  createdAt DateTime @default(now)
+  updatedAt DateTime @updatedAt
+}
+
+model Replie {
+  id       Int    @id @default(autoincrement())
+  username    String
+  avatar String  @default("default")
+  content String  @default("")
+  commentId   Int    @references(Comment.id) @onDelete(cascade)
+  createdAt DateTime @default(now)
+  updatedAt DateTime @updatedAt
+}

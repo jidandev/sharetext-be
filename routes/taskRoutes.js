@@ -5,6 +5,7 @@ const TaskController = require('../controllers/taskController');
 const router = express.Router();
 
 router.get('/task/:slug', apiKeyMiddleware, TaskController.getTaskBySlug);
+router.get('/tasks', apiKeyMiddleware, TaskController.getTaskBySlugs);
 router.get('/rendertask/:slug', apiKeyMiddleware, TaskController.renderTask);
 
 router.post('/task', apiKeyMiddleware, TaskController.createTask);

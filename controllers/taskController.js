@@ -55,6 +55,22 @@ const TaskController = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  async getTaskBySlugs(req,res) {
+    try {
+      const taskModel = getTaskModel();
+      if (!taskModel) {
+        return res.status(500).json({ error: "ORM not initialized" });
+      }
+      
+      const slugs = req.query.slugs.split(",")
+      const tasks = await taskModel.findMany({where: {slug: slugs}});
+      
+      res.status(200).json(tasks)
+    } catch (error) {
+      console.error("❌ Error:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
   async renderTask(req,res) {
     try {
       const taskModel = getTaskModel();

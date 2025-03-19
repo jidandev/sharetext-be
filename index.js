@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
       const commentModel = getCommentModel();
       
       if(commentModel) {
-        const comment = await commentModel.create({username: socket.id, content: data.content, subTaskId: data.subTaskId})
+        const comment = await commentModel.create({username: data.username || socket.id, content: data.content, subTaskId: data.subTaskId})
         io.emit("receiveComment", {...comment, replies: []})
       }
     } catch(e) {
@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
       const replyModel = getReplyModel();
       
       if(replyModel) {
-        const reply = await replyModel.create({username: socket.id, content: data.content, commentId: data.commentId})
+        const reply = await replyModel.create({username: data.username || socket.id, content: data.content, commentId: data.commentId})
         io.emit("receiveReply", reply)
       }
     } catch(e) {

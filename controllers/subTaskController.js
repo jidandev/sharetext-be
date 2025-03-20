@@ -10,7 +10,7 @@ const SubTaskController = {
       }
       
       const {taskId} = req.body;
-      const newSubTask = await subTaskModel.create({taskId: taskId});
+      const newSubTask = await subTaskModel.create({content: "", taskId: taskId});
       res.status(200).json(newSubTask)
     } catch (error) {
       console.error("❌ Error:", error);

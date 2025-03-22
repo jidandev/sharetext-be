@@ -26,7 +26,7 @@ const TaskController = {
       let slug = await cekSlug(generateSlug())
       
       const newTask = await taskModel.create({slug: slug, title: "New task"});
-      const newSubTask = await subTaskModel.create({taskId: newTask.id});
+      const newSubTask = await subTaskModel.create({content: "", taskId: newTask.id});
       res.status(200).json({
         task: newTask,
         subTask: newSubTask,

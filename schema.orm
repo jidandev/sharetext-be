@@ -15,7 +15,7 @@ model Task {
 
 model SubTask {
   id       Int    @id @default(autoincrement())
-  content    String @default("")
+  content  String @text
   lang  String  @default("text")
   taskId   Int    @references(Task.id) @onDelete(cascade)
   createdAt DateTime @default(now)
